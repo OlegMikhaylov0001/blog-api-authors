@@ -7,6 +7,7 @@ const colors = {
     blackMainBanner: '#1C1C1C',
     postBlack: '#252525',
     authorsItem: '#004BA2',
+    bgBody: '#2B2B2B',
   },
 };
 

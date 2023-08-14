@@ -8,8 +8,9 @@ import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
 import { DateTime } from 'luxon';
 import StaticPage from './components/StaticPage';
-import bgCircle from '../src/assets/img/bg/circle-scatter-haikei (1).svg'
 import Footer from './components/Footer/Footer';
+import RegisterValid from './components/RegisterValid';
+import Modal from 'react-modal';
 type PostsArrayType = {
   userId: string;
   id: string;
@@ -57,11 +58,11 @@ function App() {
       },
       loop: true,
       breakpoints: {
-        '(min-width: 640px' :{
+        '(min-width: 640px': {
           slides: {
             perView: 2,
             spacing: 10,
-          }
+          },
         },
         '(min-width: 1024px)': {
           slides: {
@@ -105,9 +106,20 @@ function App() {
     instanceRef?.current?.update();
     instanceUsersPostRef?.current?.update();
   }, [randomUsers, instanceRef, instanceUsersPostRef]);
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
   return (
     <div className="App">
-      <Header />
+      <Header openModal={openModal} />
+      <RegisterValid isOpen={modalIsOpen} onRequestClose={closeModal} />
       <MainBanner />
       <section className="bg-myColors-mainBlueBg p-[30px] sm:p-[100px]">
         <h3 className="font-h1 text-5xl text-myColors-yellow mb-5">
@@ -196,7 +208,9 @@ function App() {
                   instanceUsersPostRef.current?.moveToIdx(idx);
                 }}
                 className={`dot w-2 h-2 rounded-full p-1 ${
-                  currentSlide === idx ? 'active bg-myColors-yellow' : ' bg-[#c5c5c5] '
+                  currentSlide === idx
+                    ? 'active bg-myColors-yellow'
+                    : ' bg-[#c5c5c5] '
                 }`}></button>
             ))}
           </div>

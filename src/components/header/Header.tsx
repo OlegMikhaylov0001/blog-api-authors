@@ -1,11 +1,17 @@
 import React from 'react';
 
-function Header() {
+type HeaderType = {
+  openModal: () => void;
+};
+
+function Header(props: HeaderType) {
   return (
-    <header className='p-3'>
+    <header className="p-3">
       <ul className="flex gap-5 max-w-screen-lg m-auto mb-5 mt-10">
-        <li className="text-myColors-yellow mr-auto font-extrabold">
-          <a href="##">Top 10 Articles</a>
+        <li
+          onClick={props.openModal}
+          className="text-myColors-yellow mr-auto font-extrabold">
+          <button>Login</button>
         </li>
         <li className="text-myColors-yellow font-extrabold">
           <a href="##">Home</a>
